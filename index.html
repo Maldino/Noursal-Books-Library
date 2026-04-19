@@ -82,6 +82,27 @@
         #book-banners {
             display: none;
         }
+		
+		/* تنسيق بانر تطبيق آخر مرة */
+#lastTimeBannerContainer {
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+    padding: 10px 0;
+}
+
+#lastTimeBannerContainer img {
+    max-width: 90%; /* جعلناه 90% لترك مساحة بسيطة على الجوانب في الموبايل */
+    height: auto;
+    border-radius: 12px; 
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15); 
+    cursor: pointer;
+    transition: transform 0.3s ease; /* تأثير خفيف عند اللمس */
+}
+
+#lastTimeBannerContainer img:active {
+    transform: scale(0.98); /* تأثير ضغطة الزر */
+}
     </style>
 </head>
 <body>
@@ -1318,7 +1339,37 @@
         window.onload = function() {
             document.getElementById('book-banners').style.display = 'none';
         };
+		
+		// كود لإخفاء البانر عند الضغط على زر تحديث القائمة
+document.addEventListener('DOMContentLoaded', function() {
+    // نبحث عن الزر من خلال النص الموجود عليه
+    const buttons = document.querySelectorAll('button');
+    let updateButton = null;
+
+    buttons.forEach(btn => {
+        if (btn.textContent.includes('تحديث القائمة')) {
+            updateButton = btn;
+        }
+    });
+
+    // إذا وجدنا الزر، نضيف له أمر إخفاء البانر عند الضغط
+    if (updateButton) {
+        updateButton.addEventListener('click', function() {
+            const banner = document.getElementById('lastTimeBannerContainer');
+            if (banner) {
+                banner.style.display = 'none';
+            }
+        });
+    }
+});
+		
     </script>
+
+<div id="lastTimeBannerContainer">
+    <a href="https://play.google.com/store/apps/details?id=com.noursal.LastTime" target="_blank">
+        <img src="https://raw.githubusercontent.com/Maldino/Noursal-Books-Library/refs/heads/main/images/LastTime.jpg" alt="تحميل تطبيق آخر مرة">
+    </a>
+</div>
 
 </body>
 </html>
